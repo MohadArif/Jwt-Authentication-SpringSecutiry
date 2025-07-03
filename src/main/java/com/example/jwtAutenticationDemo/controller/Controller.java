@@ -14,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
+
 @RestController
 @RequestMapping("/api")
 @Log4j2
@@ -57,6 +59,10 @@ public class Controller {
         return "welcome to user page";
     }
 
+    @GetMapping("/user")
+    public String getUserProfile(Principal principal){   //here principle object return login user.
+        return principal.getName();
+    }
 
     @PostMapping("/authenticate")
     public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
